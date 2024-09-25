@@ -17,6 +17,7 @@
 		7D1A1EA82BC595ED00180E39 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1EA72BC595ED00180E39 /* openapi.yaml */; };
 		7D1A1EAA2BC5962A00180E39 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1EA92BC5962A00180E39 /* openapi-generator-config.yaml */; };
 		7D5EEA662CA4575B000C2BA4 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5EEA652CA4575B000C2BA4 /* EnvironmentProvider.swift */; };
+		7D5EEA692CA46616000C2BA4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7D5EEA682CA46616000C2BA4 /* README.md */; };
 		7D75DDE22CA0575600800C2F /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D75DDE12CA0575600800C2F /* PopularMoviesViewModel.swift */; };
 		7D9A719D2BC5AFD3007C8C48 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9A719C2BC5AFD3007C8C48 /* OpenAPIURLSession */; };
 		7D9A71A02BC5AFEF007C8C48 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 7D9A719F2BC5AFEF007C8C48 /* OpenAPIRuntime */; };
@@ -59,6 +60,7 @@
 		7D1A1EA72BC595ED00180E39 /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		7D1A1EA92BC5962A00180E39 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		7D5EEA652CA4575B000C2BA4 /* EnvironmentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentProvider.swift; sourceTree = "<group>"; };
+		7D5EEA682CA46616000C2BA4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7D75DDE12CA0575600800C2F /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
 		7DA2D57A2BC6F04F0077674B /* MovieApiToDomainMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieApiToDomainMapper.swift; sourceTree = "<group>"; };
 		7DB30E3C2BC5B5D80049C9BC /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		7D1A1E7C2BC5928B00180E39 = {
 			isa = PBXGroup;
 			children = (
+				7D5EEA682CA46616000C2BA4 /* README.md */,
 				7D1A1E872BC5928C00180E39 /* TMDB */,
 				7D1A1E9C2BC5951500180E39 /* ApiClient */,
 				7D1A1E862BC5928C00180E39 /* Products */,
@@ -288,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5EEA692CA46616000C2BA4 /* README.md in Resources */,
 				7D1A1E902BC5928D00180E39 /* Preview Assets.xcassets in Resources */,
 				7D1A1E8D2BC5928D00180E39 /* Assets.xcassets in Resources */,
 			);
