@@ -5,7 +5,7 @@
 //  Created by Bálna on 10/04/2024.
 //
 
-import Foundation
+import Model
 
 struct MovieApiToDomainMapper {
     func map(from apiModel: Operations.movie_hyphen_popular_hyphen_list.Output.Ok.Body.jsonPayload.resultsPayload) -> [Movie] {
@@ -42,25 +42,5 @@ struct MovieApiToDomainMapper {
                 title: model.title
             )
         }
-    }
-}
-
-public struct Movie: Identifiable {
-    public let id: Int?
-    public let originalTitle: String?
-    public let overview: String?
-    public let popularity: Double?
-    public let title: String?
-    
-    public init(id: Int?,
-                originalTitle: String?,
-                overview: String?,
-                popularity: Double?,
-                title: String?) {
-        self.id = id
-        self.originalTitle = originalTitle
-        self.overview = overview
-        self.popularity = popularity
-        self.title = title
     }
 }

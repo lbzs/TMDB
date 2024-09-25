@@ -5,7 +5,8 @@
 //  Created by Bálna on 09/04/2024.
 //
 
-import Foundation
+import Model
+
 import OpenAPIURLSession
 
 public protocol ApiClientInterface {

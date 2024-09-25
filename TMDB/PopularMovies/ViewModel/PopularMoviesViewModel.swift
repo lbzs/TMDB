@@ -5,9 +5,10 @@
 //  Created by Bálna on 22/09/2024.
 //
 
-import Combine
-import Foundation
 import ApiClient
+import Model
+
+import Combine
 
 @MainActor
 final class PopularMoviesViewModel: ObservableObject {

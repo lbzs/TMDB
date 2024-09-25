@@ -5,8 +5,10 @@
 //  Created by Bálna on 2024. 04. 09..
 //
 
-import SwiftUI
 import ApiClient
+import Model
+
+import SwiftUI
 
 struct ContentView: View {
     @ObservedObject
