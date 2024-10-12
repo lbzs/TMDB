@@ -5,44 +5,28 @@
 //  Created by Bálna on 09/04/2024.
 //
 
-import Model
-
-import OpenAPIURLSession
+import TMDb
 
 public protocol ApiClientInterface {
-    func popularMovies() async throws -> [Movie]
+    func popularMovies() async throws -> [MovieListItem]
 }
 
 public struct ApiClient: ApiClientInterface {
-    private let client: Client
-    private let movieMapper = MovieApiToDomainMapper()
+    private let client: TMDbClient
     
     public init() throws {
-        client = Client(
-            serverURL: try Servers.server1(),
-            transport: URLSessionTransport()
-        )
+        client = TMDbClient(apiKey: "")
     }
     
-    public func popularMovies() async throws -> [Movie] {
-        let response = try await client.movie_hyphen_popular_hyphen_list(.init())
-        switch response {
-        case let .ok(pagedResult):
-            switch pagedResult.body {
-            case let .json(jsonPayload):
-                guard let apiModels = jsonPayload.results else { return [] }
-                return movieMapper.map(from: apiModels)
-            }
-        case .undocumented(statusCode: let statusCode, _):
-            throw NSError(domain: "", code: statusCode)
-        }
+    public func popularMovies() async throws -> [MovieListItem] {
+        return try await client.movies.popular(page: 1, country: nil, language: nil).results
     }
 }
 
 public struct MockApiClient: ApiClientInterface {
     public init() {}
-    public func popularMovies() async throws -> [Movie] {
+    public func popularMovies() async throws -> [MovieListItem] {
         try await Task.sleep(nanoseconds: 100)
-        return [Movie(id: 1, originalTitle: "Alien", overview: "Alien overview", popularity: 9.2, title: "Alien")]
+        return [MovieListItem(id: 1, title: "Alien", originalTitle: "Alien", originalLanguage: "en", overview: "overview", genreIDs: [])]
     }
 }

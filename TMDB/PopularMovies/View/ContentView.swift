@@ -6,7 +6,7 @@
 //
 
 import ApiClient
-import Model
+import TMDb
 
 import SwiftUI
 
@@ -19,8 +19,8 @@ struct ContentView: View {
     }
 
     var body: some View {
-        List(viewModel.movies) { (movie: Movie) in
-            Text(movie.title ?? "dummy")
+        List(viewModel.movies) { (movie: MovieListItem) in
+            Text(movie.title)
         }
         .onAppear(perform: {
             viewModel.handleAction(action: .viewDidAppear)

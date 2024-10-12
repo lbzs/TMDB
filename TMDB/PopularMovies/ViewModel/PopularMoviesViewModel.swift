@@ -6,7 +6,7 @@
 //
 
 import ApiClient
-import Model
+import TMDb
 
 import Combine
 
@@ -17,7 +17,7 @@ final class PopularMoviesViewModel: ObservableObject {
     }
     
     @Published 
-    var movies = [Movie]()
+    var movies = [MovieListItem]()
     
     private let apiClient: ApiClientInterface
     
