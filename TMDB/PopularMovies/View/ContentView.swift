@@ -21,6 +21,9 @@ struct ContentView: View {
     var body: some View {
         List(viewModel.movies) { (movie: MovieListItem) in
             Text(movie.title)
+                .onTapGesture {
+                    viewModel.handleAction(action: .)
+                }
         }
         .onAppear(perform: {
             viewModel.handleAction(action: .viewDidAppear)

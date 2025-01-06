@@ -14,12 +14,14 @@ import Combine
 final class PopularMoviesViewModel: ObservableObject {
     enum Action {
         case viewDidAppear
+        case itemDidSelect(MovieListItem)
     }
     
     @Published 
     var movies = [MovieListItem]()
     
     private let apiClient: ApiClientInterface
+    private let coordinator: 
     
     init(apiClient: ApiClientInterface) {
         self.apiClient = apiClient
@@ -31,6 +33,8 @@ final class PopularMoviesViewModel: ObservableObject {
             Task {
                 movies = try await apiClient.popularMovies()
             }
+        case .itemDidSelect(let movieDetails):
+            
         }
     }
 }

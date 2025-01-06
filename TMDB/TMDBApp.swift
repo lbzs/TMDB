@@ -7,8 +7,8 @@
 
 import ApiClient
 
-import SwiftUI
 import OSLog
+import SwiftUI
 
 @main
 struct TMDBApp: App {
