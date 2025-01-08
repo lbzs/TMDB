@@ -5,8 +5,8 @@
 //  Created by Bálna on 06/01/2025.
 //
 
-import TMDb
+import ApiClient
 
 struct MovieDetailsViewModel {
-    let movieDetails: MovieListItem
+    let movie: Movie
 }

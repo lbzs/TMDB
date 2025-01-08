@@ -16,9 +16,9 @@ struct MovieDetailsView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.movieDetails.title)
-            Text(viewModel.movieDetails.originalTitle)
-            Text(viewModel.movieDetails.overview)
+            Text(viewModel.movie.title)
+            Text(viewModel.movie.originalTitle)
+            Text(viewModel.movie.overview)
         }
     }
 }

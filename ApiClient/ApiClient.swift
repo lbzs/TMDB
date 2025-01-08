@@ -8,7 +8,7 @@
 import TMDb
 
 public protocol ApiClientInterface {
-    func popularMovies() async throws -> [MovieListItem]
+    func popularMovies() async throws -> [Movie]
 }
 
 public struct ApiClient: ApiClientInterface {
@@ -18,15 +18,19 @@ public struct ApiClient: ApiClientInterface {
         client = TMDbClient(apiKey: "")
     }
     
-    public func popularMovies() async throws -> [MovieListItem] {
-        return try await client.movies.popular(page: 1, country: nil, language: nil).results
+    public func popularMovies() async throws -> [Movie] {
+        try await client
+            .movies
+            .popular(page: 1, country: nil, language: nil)
+            .results
+            .map { .init(apimodel: $0)}
     }
 }
 
 public struct MockApiClient: ApiClientInterface {
     public init() {}
-    public func popularMovies() async throws -> [MovieListItem] {
+    public func popularMovies() async throws -> [Movie] {
         try await Task.sleep(nanoseconds: 100)
-        return [MovieListItem(id: 1, title: "Alien", originalTitle: "Alien", originalLanguage: "en", overview: "overview", genreIDs: [])]
+        return [Movie(id: 1, title: "Alien", originalTitle: "Alien", originalLanguage: "en", overview: "overview")]
     }
 }

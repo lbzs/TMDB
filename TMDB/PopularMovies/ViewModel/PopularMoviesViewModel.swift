@@ -6,22 +6,20 @@
 //
 
 import ApiClient
-import TMDb
 
 import Combine
+import SwiftUI
 
 @MainActor
 final class PopularMoviesViewModel: ObservableObject {
     enum Action {
         case viewDidAppear
-        case itemDidSelect(MovieListItem)
     }
     
     @Published 
-    var movies = [MovieListItem]()
+    var movies = [Movie]()
     
     private let apiClient: ApiClientInterface
-    private let coordinator: 
     
     init(apiClient: ApiClientInterface) {
         self.apiClient = apiClient
@@ -33,8 +31,6 @@ final class PopularMoviesViewModel: ObservableObject {
             Task {
                 movies = try await apiClient.popularMovies()
             }
-        case .itemDidSelect(let movieDetails):
-            
         }
     }
 }

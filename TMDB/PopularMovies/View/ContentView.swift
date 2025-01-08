@@ -6,28 +6,31 @@
 //
 
 import ApiClient
-import TMDb
 
 import SwiftUI
 
 struct ContentView: View {
     @ObservedObject
     private var viewModel: PopularMoviesViewModel
+    @State
+    private var navigationStack: [Movie] = []
     
     init(viewModel: PopularMoviesViewModel) {
         self.viewModel = viewModel
     }
 
     var body: some View {
-        List(viewModel.movies) { (movie: MovieListItem) in
-            Text(movie.title)
-                .onTapGesture {
-                    viewModel.handleAction(action: .)
-                }
+        NavigationStack(path: $navigationStack) {
+            List(viewModel.movies) { (movie: Movie) in
+                NavigationLink(movie.title, value: movie)
+            }
+            .navigationDestination(for: Movie.self) { (movie: Movie) in
+                MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))
+            }
+            .onAppear(perform: {
+                viewModel.handleAction(action: .viewDidAppear)
+            })
         }
-        .onAppear(perform: {
-            viewModel.handleAction(action: .viewDidAppear)
-        })
     }
 }
 
