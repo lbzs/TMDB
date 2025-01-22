@@ -12,12 +12,12 @@
 		7D1A1E8D2BC5928D00180E39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1E8C2BC5928D00180E39 /* Assets.xcassets */; };
 		7D1A1E902BC5928D00180E39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1E8F2BC5928D00180E39 /* Preview Assets.xcassets */; };
 		7D1A1E9E2BC5951500180E39 /* ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D1A1E9D2BC5951500180E39 /* ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D1A1EA12BC5951500180E39 /* ApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; };
-		7D1A1EA22BC5951500180E39 /* ApiClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7D2717D92CBAA85F00855327 /* TMDb in Frameworks */ = {isa = PBXBuildFile; productRef = 7D2717D82CBAA85F00855327 /* TMDb */; };
 		7D5EEA662CA4575B000C2BA4 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5EEA652CA4575B000C2BA4 /* EnvironmentProvider.swift */; };
 		7D5EEA692CA46616000C2BA4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7D5EEA682CA46616000C2BA4 /* README.md */; };
 		7D75DDE22CA0575600800C2F /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D75DDE12CA0575600800C2F /* PopularMoviesViewModel.swift */; };
+		7D9AE96D2D41523D00A850BD /* ApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; };
+		7D9AE96E2D41523D00A850BD /* ApiClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7DB30E3D2BC5B5D80049C9BC /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB30E3C2BC5B5D80049C9BC /* ApiClient.swift */; };
 		7DCC6B262D2DA4BE000A5068 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC6B252D2DA4BE000A5068 /* Movie.swift */; };
 		7DEB9A3B2D2C376E00FB7495 /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEB9A3A2D2C376E00FB7495 /* MovieDetailsView.swift */; };
@@ -35,13 +35,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		7D1A1EA62BC5951500180E39 /* Embed Frameworks */ = {
+		7D9AE96F2D41523D00A850BD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7D1A1EA22BC5951500180E39 /* ApiClient.framework in Embed Frameworks */,
+				7D9AE96E2D41523D00A850BD /* ApiClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D1A1EA12BC5951500180E39 /* ApiClient.framework in Frameworks */,
+				7D9AE96D2D41523D00A850BD /* ApiClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +230,7 @@
 				7D1A1E812BC5928C00180E39 /* Sources */,
 				7D1A1E822BC5928C00180E39 /* Frameworks */,
 				7D1A1E832BC5928C00180E39 /* Resources */,
-				7D1A1EA62BC5951500180E39 /* Embed Frameworks */,
+				7D9AE96F2D41523D00A850BD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,7 +256,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7D9A71A22BC5B017007C8C48 /* PBXTargetDependency */,
 			);
 			name = ApiClient;
 			packageProductDependencies = (
@@ -358,10 +357,6 @@
 			target = 7D1A1E9A2BC5951500180E39 /* ApiClient */;
 			targetProxy = 7D1A1E9F2BC5951500180E39 /* PBXContainerItemProxy */;
 		};
-		7D9A71A22BC5B017007C8C48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 7D9A71A12BC5B017007C8C48 /* OpenAPIGenerator */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -401,6 +396,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -461,6 +457,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -482,7 +479,6 @@
 		7D1A1E942BC5928D00180E39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -517,7 +513,6 @@
 		7D1A1E952BC5928D00180E39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -669,14 +664,6 @@
 				minimumVersion = 13.1.0;
 			};
 		};
-		7D9A71992BC5AF90007C8C48 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-openapi-generator";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -684,11 +671,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D2717D72CBAA83600855327 /* XCRemoteSwiftPackageReference "TMDb" */;
 			productName = TMDb;
-		};
-		7D9A71A12BC5B017007C8C48 /* OpenAPIGenerator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7D9A71992BC5AF90007C8C48 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
-			productName = "plugin:OpenAPIGenerator";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
