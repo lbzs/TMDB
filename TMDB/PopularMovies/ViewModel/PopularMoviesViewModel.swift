@@ -17,9 +17,9 @@ final class PopularMoviesViewModel: ObservableObject {
     }
     
     @Published 
-    var movies = [Movie]()
+    var movies = [MovieListItem]()
     
-    private let apiClient: ApiClientInterface
+    let apiClient: ApiClientInterface
     
     init(apiClient: ApiClientInterface) {
         self.apiClient = apiClient

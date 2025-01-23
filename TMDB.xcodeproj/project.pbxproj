@@ -12,9 +12,10 @@
 		7D1A1E8D2BC5928D00180E39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1E8C2BC5928D00180E39 /* Assets.xcassets */; };
 		7D1A1E902BC5928D00180E39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1E8F2BC5928D00180E39 /* Preview Assets.xcassets */; };
 		7D1A1E9E2BC5951500180E39 /* ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D1A1E9D2BC5951500180E39 /* ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D2717D92CBAA85F00855327 /* TMDb in Frameworks */ = {isa = PBXBuildFile; productRef = 7D2717D82CBAA85F00855327 /* TMDb */; };
 		7D5EEA662CA4575B000C2BA4 /* EnvironmentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5EEA652CA4575B000C2BA4 /* EnvironmentProvider.swift */; };
 		7D5EEA692CA46616000C2BA4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7D5EEA682CA46616000C2BA4 /* README.md */; };
+		7D6A5D2F2D42A7D200E49818 /* MovieListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6A5D2E2D42A7D200E49818 /* MovieListItem.swift */; };
+		7D6A5D312D42AEBF00E49818 /* TMDb in Frameworks */ = {isa = PBXBuildFile; productRef = 7D6A5D302D42AEBF00E49818 /* TMDb */; };
 		7D75DDE22CA0575600800C2F /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D75DDE12CA0575600800C2F /* PopularMoviesViewModel.swift */; };
 		7D9AE96D2D41523D00A850BD /* ApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; };
 		7D9AE96E2D41523D00A850BD /* ApiClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -58,6 +59,7 @@
 		7D1A1E9D2BC5951500180E39 /* ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiClient.h; sourceTree = "<group>"; };
 		7D5EEA652CA4575B000C2BA4 /* EnvironmentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentProvider.swift; sourceTree = "<group>"; };
 		7D5EEA682CA46616000C2BA4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7D6A5D2E2D42A7D200E49818 /* MovieListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListItem.swift; sourceTree = "<group>"; };
 		7D75DDE12CA0575600800C2F /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
 		7DB30E3C2BC5B5D80049C9BC /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		7DCC6B252D2DA4BE000A5068 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -78,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D2717D92CBAA85F00855327 /* TMDb in Frameworks */,
+				7D6A5D312D42AEBF00E49818 /* TMDb in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				7DCC6B252D2DA4BE000A5068 /* Movie.swift */,
+				7D6A5D2E2D42A7D200E49818 /* MovieListItem.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -259,7 +262,7 @@
 			);
 			name = ApiClient;
 			packageProductDependencies = (
-				7D2717D82CBAA85F00855327 /* TMDb */,
+				7D6A5D302D42AEBF00E49818 /* TMDb */,
 			);
 			productName = ApiClient;
 			productReference = 7D1A1E9B2BC5951500180E39 /* ApiClient.framework */;
@@ -346,6 +349,7 @@
 			files = (
 				7DCC6B262D2DA4BE000A5068 /* Movie.swift in Sources */,
 				7DB30E3D2BC5B5D80049C9BC /* ApiClient.swift in Sources */,
+				7D6A5D2F2D42A7D200E49818 /* MovieListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +671,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7D2717D82CBAA85F00855327 /* TMDb */ = {
+		7D6A5D302D42AEBF00E49818 /* TMDb */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7D2717D72CBAA83600855327 /* XCRemoteSwiftPackageReference "TMDb" */;
 			productName = TMDb;

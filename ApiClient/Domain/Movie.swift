@@ -10,25 +10,19 @@ import TMDb
 public struct Movie: Identifiable, Hashable {
     public let id: Int
     public let title: String
-    public let originalTitle: String
-    public let originalLanguage: String
-    public let overview: String
+    public let runtime: Int?
     
-    public init(id: Int, title: String, originalTitle: String, originalLanguage: String, overview: String) {
+    public init(id: Int, title: String, runtime: Int?) {
         self.id = id
         self.title = title
-        self.originalTitle = originalTitle
-        self.originalLanguage = originalLanguage
-        self.overview = overview
+        self.runtime = runtime
     }
     
-    internal init(apimodel: MovieListItem) {
+    internal init(apiModel: TMDb.Movie) {
         self.init(
-            id: apimodel.id,
-            title: apimodel.title,
-            originalTitle: apimodel.originalTitle,
-            originalLanguage: apimodel.originalLanguage,
-            overview: apimodel.overview
+            id: apiModel.id,
+            title: apiModel.title,
+            runtime: apiModel.runtime
         )
     }
 }

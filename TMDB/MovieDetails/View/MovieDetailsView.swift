@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct MovieDetailsView: View {
-    private let viewModel: MovieDetailsViewModel
+    @ObservedObject
+    private var viewModel: MovieDetailsViewModel
     
     init(viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        VStack {
-            Text(viewModel.movie.title)
-            Text(viewModel.movie.originalTitle)
-            Text(viewModel.movie.overview)
+        if let movie = viewModel.movie {
+            VStack {
+                Text(movie.title)
+                Text("\(movie.runtime) minutes")
+            }
+        } else {
+            ProgressView("Loading...")
         }
     }
 }

@@ -13,7 +13,7 @@ struct ContentView: View {
     @ObservedObject
     private var viewModel: PopularMoviesViewModel
     @State
-    private var navigationStack: [Movie] = []
+    private var navigationStack: [MovieListItem] = []
     
     init(viewModel: PopularMoviesViewModel) {
         self.viewModel = viewModel
@@ -21,11 +21,11 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $navigationStack) {
-            List(viewModel.movies) { (movie: Movie) in
+            List(viewModel.movies) { (movie: MovieListItem) in
                 NavigationLink(movie.title, value: movie)
             }
-            .navigationDestination(for: Movie.self) { (movie: Movie) in
-                MovieDetailsView(viewModel: MovieDetailsViewModel(movie: movie))
+            .navigationDestination(for: MovieListItem.self) { (movie: MovieListItem) in
+                MovieDetailsView(viewModel: MovieDetailsViewModel(apiClient: viewModel.apiClient, movieId: movie.id))
             }
             .onAppear(perform: {
                 viewModel.handleAction(action: .viewDidAppear)
