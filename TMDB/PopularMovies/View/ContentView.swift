@@ -5,8 +5,6 @@
 //  Created by Bálna on 2024. 04. 09..
 //
 
-import ApiClient
-
 import SwiftUI
 
 struct ContentView: View {

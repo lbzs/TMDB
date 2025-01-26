@@ -5,7 +5,7 @@
 //  Created by Bálna on 06/01/2025.
 //
 
-import ApiClient
+import Combine
 
 @MainActor
 final class MovieDetailsViewModel: ObservableObject {
