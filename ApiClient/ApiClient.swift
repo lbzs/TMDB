@@ -5,11 +5,13 @@
 //  Created by Bálna on 09/04/2024.
 //
 
+import Foundation
 import TMDb
 
 public protocol ApiClientInterface {
     func popularMovies() async throws -> [MovieListItem]
     func movieDetails(movieId: Int) async throws -> Movie
+    func watchProviders() async throws -> [WatchProvider]
 }
 
 public struct ApiClient: ApiClientInterface {
@@ -33,6 +35,13 @@ public struct ApiClient: ApiClientInterface {
             .details(forMovie: movieId, language: nil)
         return Movie(apiModel: apiModel)
     }
+    
+    public func watchProviders() async throws -> [WatchProvider] {
+        try await client
+            .watchProviders
+            .movieWatchProviders(filter: nil, language: nil)
+            .map { .init(id: $0.id, name: $0.name, logoPath: $0.logoPath) }
+    }
 }
 
 public struct MockApiClient: ApiClientInterface {
@@ -44,5 +53,9 @@ public struct MockApiClient: ApiClientInterface {
     public func movieDetails(movieId: Int) async throws -> Movie {
         try await Task.sleep(nanoseconds: 100)
         return Movie(id: 1, title: "Alien", runtime: 111)
+    }
+    public func watchProviders() async throws -> [WatchProvider] {
+        try await Task.sleep(nanoseconds: 100)
+        return [WatchProvider(id: 1, name: "Netflix", logoPath: URL(string: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg")!)]
     }
 }
