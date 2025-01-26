@@ -1,6 +1,6 @@
 //
-//  TMDBApp.swift
-//  TMDB
+//  StreamitApp.swift
+//  Streamit
 //
 //  Created by Bálna on 2024. 04. 09..
 //
@@ -9,7 +9,7 @@ import OSLog
 import SwiftUI
 
 @main
-struct TMDBApp: App {
+struct StreamitApp: App {
     private var logger: Logger
     private var apiClient: ApiClientInterface
     var body: some Scene {
