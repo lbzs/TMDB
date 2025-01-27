@@ -12,6 +12,7 @@ public protocol ApiClientInterface {
     func popularMovies() async throws -> [MovieListItem]
     func movieDetails(movieId: Int) async throws -> Movie
     func watchProviders() async throws -> [WatchProvider]
+    func countries() async throws -> [Country]
 }
 
 public struct ApiClient: ApiClientInterface {
@@ -42,6 +43,13 @@ public struct ApiClient: ApiClientInterface {
             .movieWatchProviders(filter: nil, language: nil)
             .map { .init(id: $0.id, name: $0.name, logoPath: $0.logoPath) }
     }
+    
+    public func countries() async throws -> [Country] {
+        try await client
+            .configurations
+            .countries()
+            .map { .init(id: $0.id, countryCode: $0.countryCode, name: $0.name, englishName: $0.englishName) }
+    }
 }
 
 public struct MockApiClient: ApiClientInterface {
@@ -57,5 +65,9 @@ public struct MockApiClient: ApiClientInterface {
     public func watchProviders() async throws -> [WatchProvider] {
         try await Task.sleep(nanoseconds: 100)
         return [WatchProvider(id: 1, name: "Netflix", logoPath: URL(string: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg")!)]
+    }
+    public func countries() async throws -> [Country] {
+        try await Task.sleep(nanoseconds: 100)
+        return [Country(id: "1", countryCode: "1", name: "USA", englishName: "USA")]
     }
 }
