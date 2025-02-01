@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WatchProvider {
+public struct WatchProvider: Identifiable {
     public let id: Int
     public let name: String
     public let logoPath: URL

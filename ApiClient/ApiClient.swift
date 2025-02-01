@@ -40,7 +40,7 @@ public struct ApiClient: ApiClientInterface {
     public func watchProviders() async throws -> [WatchProvider] {
         try await client
             .watchProviders
-            .movieWatchProviders(filter: nil, language: nil)
+            .movieWatchProviders(filter: .init(country: "hu"), language: nil)
             .map { .init(id: $0.id, name: $0.name, logoPath: $0.logoPath) }
     }
     

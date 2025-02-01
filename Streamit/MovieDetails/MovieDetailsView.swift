@@ -26,7 +26,3 @@ struct MovieDetailsView: View {
         }
     }
 }
-
-//#Preview {
-//    MovieDetailsView(viewModel: MovieDetailsViewModel(movieDetails: <#T##MovieListItem#>))
-//}
