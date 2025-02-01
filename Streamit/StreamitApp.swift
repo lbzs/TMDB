@@ -15,7 +15,10 @@ struct StreamitApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: PopularMoviesViewModel(apiClient: apiClient))
+            StreamingProvidersView(
+                viewModel: StreamingProvidersViewModel(
+                    apiClient: apiClient,
+                    imageConfiguration: Configuration.shared.imageConfiguration))
         }
     }
 
@@ -39,6 +42,7 @@ struct StreamitApp: App {
     private func loadConfigurations() {
         Task {
             Configuration.shared.countries = try await apiClient.countries()
+            Configuration.shared.imageConfiguration = try await apiClient.imageConfiguration()
         }
     }
 }

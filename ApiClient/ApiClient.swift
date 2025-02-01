@@ -13,6 +13,8 @@ public protocol ApiClientInterface {
     func movieDetails(movieId: Int) async throws -> Movie
     func watchProviders() async throws -> [WatchProvider]
     func countries() async throws -> [Country]
+    func imageConfiguration() async throws -> ImageConfiguration
+    func downloadImageData(url: URL) async throws -> Data
 }
 
 public struct ApiClient: ApiClientInterface {
@@ -40,7 +42,7 @@ public struct ApiClient: ApiClientInterface {
     public func watchProviders() async throws -> [WatchProvider] {
         try await client
             .watchProviders
-            .movieWatchProviders(filter: .init(country: "hu"), language: nil)
+            .tvSeriesWatchProviders(filter: .init(country: "hu"), language: nil)
             .map { .init(id: $0.id, name: $0.name, logoPath: $0.logoPath) }
     }
     
@@ -49,6 +51,19 @@ public struct ApiClient: ApiClientInterface {
             .configurations
             .countries()
             .map { .init(id: $0.id, countryCode: $0.countryCode, name: $0.name, englishName: $0.englishName) }
+    }
+
+    public func imageConfiguration() async throws -> ImageConfiguration {
+        let images = try await client
+            .configurations
+            .apiConfiguration()
+            .images
+        return .init(secureBaseURL: images.secureBaseURL, logoSizes: images.logoSizes)
+    }
+
+    public func downloadImageData(url: URL) async throws -> Data {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 }
 
@@ -69,5 +84,12 @@ public struct MockApiClient: ApiClientInterface {
     public func countries() async throws -> [Country] {
         try await Task.sleep(nanoseconds: 100)
         return [Country(id: "1", countryCode: "1", name: "USA", englishName: "USA")]
+    }
+    public func imageConfiguration() async throws -> ImageConfiguration {
+        try await Task.sleep(nanoseconds: 100)
+        return ImageConfiguration() // TODO: fix
+    }
+    public func downloadImageData(url: URL) async throws -> Data {
+        return Data() // TODO: fix
     }
 }

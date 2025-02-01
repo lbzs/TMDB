@@ -17,6 +17,7 @@ struct StreamingProvidersView: View {
 
     var body: some View {
         List(viewModel.providers) { (provider: WatchProvider) in
+            viewModel.providerLogos[provider.id]
             Text(provider.name)
         }
         .onAppear(perform: {
