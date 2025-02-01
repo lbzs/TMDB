@@ -17,8 +17,7 @@ final class StreamingProvidersViewModel: ObservableObject {
     @Published
     private(set) var providers = [WatchProvider]()
     @Published
-    private(set) var providerLogos = [Int: Image]()
-    private let defaultLogo = Image(systemName: "photo")
+    private(set) var logoURLs = [Int: URL]()
 
     private let apiClient: ApiClientInterface
     private let imageConfiguration: ImageConfiguration
@@ -32,30 +31,15 @@ final class StreamingProvidersViewModel: ObservableObject {
         switch action {
         case .viewDidAppear:
             Task {
-                providers = try await apiClient.watchProviders()
-                try await withThrowingTaskGroup(of: (Int, Data?).self) { group in
-                    let baseURL = imageConfiguration.secureBaseURL
-                    for provider in providers {
-                        group.addTask { [apiClient] in
-                            guard let url = baseURL?.appending(path: "w45").appending(path: provider.logoPath.path()) else {
-                                return (provider.id, nil)
-                            }
-                            return try await (provider.id, apiClient.downloadImageData(url: url))
-                        }
-                    }
+                let providers = try await apiClient.watchProviders()
 
-                    for try await logo in group {
-                        if let image = logo.1,
-                           let uiImage = UIImage(data: image) {
-                            providerLogos[logo.0] = Image(uiImage: uiImage)
-                        }
-                    }
+                let baseURL = imageConfiguration.secureBaseURL
+                for provider in providers {
+                    logoURLs[provider.id] = baseURL?.appending(path: "w154").appending(path: provider.logoPath.path())
                 }
+
+                self.providers = providers
             }
         }
-    }
-
-    func logo(for id: WatchProvider.ID) -> Image {
-        providerLogos[id] ?? defaultLogo
     }
 }

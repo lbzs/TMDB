@@ -17,8 +17,20 @@ struct StreamingProvidersView: View {
 
     var body: some View {
         List(viewModel.providers) { (provider: WatchProvider) in
-            viewModel.providerLogos[provider.id]
-            Text(provider.name)
+            HStack {
+                AsyncImage(url: viewModel.logoURLs[provider.id]) { (image: Image) in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 50, height: 50)
+                .aspectRatio(contentMode: .fit)
+                .clipShape(.buttonBorder)
+
+                Text(provider.name)
+            }
         }
         .onAppear(perform: {
             viewModel.handle(action: .viewDidAppear)
