@@ -11,6 +11,7 @@ public struct WatchProvider: Identifiable {
     public let id: Int
     public let name: String
     public let logoPath: URL
+    public var logoURL: URL?
 
     public init(id: Int, name: String, logoPath: URL) {
         self.id = id

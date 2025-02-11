@@ -16,8 +16,6 @@ final class StreamingProvidersViewModel: ObservableObject {
 
     @Published
     private(set) var providers = [WatchProvider]()
-    @Published
-    private(set) var logoURLs = [Int: URL]()
 
     private let apiClient: ApiClientInterface
     private let imageConfiguration: ImageConfiguration
@@ -34,11 +32,12 @@ final class StreamingProvidersViewModel: ObservableObject {
                 let providers = try await apiClient.watchProviders()
 
                 let baseURL = imageConfiguration.secureBaseURL
-                for provider in providers {
-                    logoURLs[provider.id] = baseURL?.appending(path: "w154").appending(path: provider.logoPath.path())
-                }
 
-                self.providers = providers
+                self.providers = providers.map { (provider: WatchProvider) in
+                    var provider = provider
+                    provider.logoURL = baseURL?.appending(path: "w154").appending(path: provider.logoPath.path())
+                    return provider
+                }
             }
         }
     }
