@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class Configuration {
+public actor Configuration {
     public var countries: [Country]
     public var imageConfiguration: ImageConfiguration
 
@@ -17,6 +17,14 @@ public final class Configuration {
     }
     
     public static var shared = Configuration()
+
+    public func update(countries: [Country]) {
+        self.countries = countries
+    }
+
+    public func update(imageConfiguration: ImageConfiguration) {
+        self.imageConfiguration = imageConfiguration
+    }
 }
 
 public struct ImageConfiguration {

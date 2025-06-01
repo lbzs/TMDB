@@ -18,7 +18,7 @@ struct StreamitApp: App {
             StreamingProvidersView(
                 viewModel: StreamingProvidersViewModel(
                     apiClient: apiClient,
-                    imageConfiguration: Configuration.shared.imageConfiguration))
+                    configuration: Configuration.shared))
         }
     }
 
@@ -35,14 +35,21 @@ struct StreamitApp: App {
             loadConfigurations()
         } catch {
             logger.critical("APIClient could not created!")
-            fatalError("Critical error happened!")
+            fatalError("Critical error happened: \(error)")
         }
     }
 
     private func loadConfigurations() {
         Task {
-            Configuration.shared.countries = try await apiClient.countries()
-            Configuration.shared.imageConfiguration = try await apiClient.imageConfiguration()
+            do {
+                let countries = try await apiClient.countries()
+                await Configuration.shared.update(countries: countries)
+                let imageConfiguration = try await apiClient.imageConfiguration()
+                await Configuration.shared.update(imageConfiguration: imageConfiguration)
+            } catch {
+                logger.critical("Critical error happened while downloading the configuratino: \(error)")
+                fatalError("Error happened: \(error)")
+            }
         }
     }
 }

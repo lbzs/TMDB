@@ -18,11 +18,11 @@ final class StreamingProvidersViewModel: ObservableObject {
     private(set) var providers = [WatchProvider]()
 
     private let apiClient: ApiClientInterface
-    private let imageConfiguration: ImageConfiguration
+    private let configuration: Configuration
 
-    init(apiClient: ApiClientInterface, imageConfiguration: ImageConfiguration) {
+    init(apiClient: ApiClientInterface, configuration: Configuration) {
         self.apiClient = apiClient
-        self.imageConfiguration = imageConfiguration
+        self.configuration = configuration
     }
 
     func handle(action: Action) {
@@ -31,11 +31,13 @@ final class StreamingProvidersViewModel: ObservableObject {
             Task {
                 let providers = try await apiClient.watchProviders()
 
-                let baseURL = imageConfiguration.secureBaseURL
+                guard let baseURL = await configuration.imageConfiguration.secureBaseURL else {
+                    fatalError("baseURL shouln't be nil!")
+                }
 
                 self.providers = providers.map { (provider: WatchProvider) in
                     var provider = provider
-                    provider.logoURL = baseURL?.appending(path: "w154").appending(path: provider.logoPath.path())
+                    provider.logoURL = baseURL.appending(path: "w154").appending(path: provider.logoPath.path())
                     return provider
                 }
             }

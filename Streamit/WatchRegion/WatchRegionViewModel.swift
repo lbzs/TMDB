@@ -25,7 +25,9 @@ final class WatchRegionViewModel: ObservableObject {
     func handle(action: Action) {
         switch action {
         case .viewDidAppear:
-            countries = Configuration.shared.countries
+            Task {
+                countries = await Configuration.shared.countries
+            }
         }
     }
 }
