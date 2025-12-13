@@ -18,9 +18,9 @@ final class StreamingProvidersViewModel: ObservableObject {
     private(set) var providers = [WatchProvider]()
 
     private let apiClient: ApiClientInterface
-    private let configuration: Configuration
+    private let configuration: Configuration?
 
-    init(apiClient: ApiClientInterface, configuration: Configuration) {
+    init(apiClient: ApiClientInterface, configuration: Configuration?) {
         self.apiClient = apiClient
         self.configuration = configuration
     }
@@ -31,7 +31,7 @@ final class StreamingProvidersViewModel: ObservableObject {
             Task {
                 let providers = try await apiClient.watchProviders()
 
-                guard let baseURL = await configuration.imageConfiguration.secureBaseURL else {
+                guard let baseURL = configuration?.imageConfiguration.secureBaseURL else {
                     fatalError("baseURL shouln't be nil!")
                 }
 

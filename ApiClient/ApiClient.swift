@@ -87,7 +87,7 @@ public struct MockApiClient: ApiClientInterface {
     }
     public func imageConfiguration() async throws -> ImageConfiguration {
         try await Task.sleep(nanoseconds: 100)
-        return ImageConfiguration() // TODO: fix
+        return ImageConfiguration(secureBaseURL: URL(string: "")!, logoSizes: []) // TODO: fix
     }
     public func downloadImageData(url: URL) async throws -> Data {
         return Data() // TODO: fix
