@@ -21,8 +21,10 @@ struct RootView: View {
         switch configuration.state {
         case .initial:
             Color.green
-                .task {
-                    await configuration.loadConfiguration()
+                .onAppear {
+                    Task {
+                        await configuration.loadConfiguration()
+                    }
                 }
         case .loading:
             ProgressView()
