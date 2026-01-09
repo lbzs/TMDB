@@ -31,6 +31,7 @@
 		7DEB9A3F2D2C37D800FB7495 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEB9A3E2D2C37D800FB7495 /* MovieDetailsViewModel.swift */; };
 		7DF488BB2D5BC0B400FBB3FC /* StreamingProviderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF488BA2D5BC0B400FBB3FC /* StreamingProviderCell.swift */; };
 		7DF488BD2D5BC0F700FBB3FC /* StreamingProviderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF488BC2D5BC0F700FBB3FC /* StreamingProviderCellViewModel.swift */; };
+		AB6F52CF2F115A0200FFE817 /* StreamingProviderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6F52CE2F115A0200FFE817 /* StreamingProviderRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +72,7 @@
 		7DEB9A3E2D2C37D800FB7495 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		7DF488BA2D5BC0B400FBB3FC /* StreamingProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingProviderCell.swift; sourceTree = "<group>"; };
 		7DF488BC2D5BC0F700FBB3FC /* StreamingProviderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingProviderCellViewModel.swift; sourceTree = "<group>"; };
+		AB6F52CE2F115A0200FFE817 /* StreamingProviderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingProviderRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				7D14DFDA2D4DF3DE00FDC786 /* StreamingProvidersViewModel.swift */,
 				7DF488BA2D5BC0B400FBB3FC /* StreamingProviderCell.swift */,
 				7DF488BC2D5BC0F700FBB3FC /* StreamingProviderCellViewModel.swift */,
+				AB6F52CE2F115A0200FFE817 /* StreamingProviderRepository.swift */,
 			);
 			path = StreamingProviders;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				7D1A1E892BC5928C00180E39 /* StreamitApp.swift in Sources */,
 				7D14DFD92D4DF3BC00FDC786 /* StreamingProvidersView.swift in Sources */,
 				7DF488BD2D5BC0F700FBB3FC /* StreamingProviderCellViewModel.swift in Sources */,
+				AB6F52CF2F115A0200FFE817 /* StreamingProviderRepository.swift in Sources */,
 				7D75DDE22CA0575600800C2F /* PopularMoviesViewModel.swift in Sources */,
 				7D58C81F2D47CA9B00F2C051 /* WatchRegionView.swift in Sources */,
 				7DEB9A3B2D2C376E00FB7495 /* MovieDetailsView.swift in Sources */,

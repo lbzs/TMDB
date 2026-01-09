@@ -9,21 +9,22 @@ import Foundation
 import SwiftUI
 
 struct RootView: View {
-    @ObservedObject private var configuration: ConfigurationManager
-    private let apiClient: ApiClientInterface
+    @ObservedObject private var configurationManager: ConfigurationManager
+    private let streaminProviderRepository: StreamingProviderRepository
 
-    init(configuration: ConfigurationManager, apiClient: ApiClientInterface) {
-        self.configuration = configuration
-        self.apiClient = apiClient
+    init(configurationManager: ConfigurationManager,
+         streaminProviderRepository: StreamingProviderRepository) {
+        self.configurationManager = configurationManager
+        self.streaminProviderRepository = streaminProviderRepository
     }
 
     var body: some View {
-        switch configuration.state {
+        switch configurationManager.state {
         case .initial:
             Color.green
                 .onAppear {
                     Task.detached {
-                        await configuration.loadConfiguration()
+                        await configurationManager.loadConfiguration()
                     }
                 }
         case .loading:
@@ -31,8 +32,7 @@ struct RootView: View {
         case .loaded:
             StreamingProvidersView(
                 viewModel: StreamingProvidersViewModel(
-                    apiClient: apiClient,
-                    configuration: configuration.configuration
+                    streaminProviderRepository: streaminProviderRepository
                 ))
         case .failed:
             Color.red

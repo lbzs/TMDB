@@ -12,12 +12,13 @@ import SwiftUI
 struct StreamitApp: App {
     private var logger: Logger
     private var apiClient: ApiClientInterface
+    private var configurationManager: ConfigurationManager
 
     var body: some Scene {
         WindowGroup {
             RootView(
-                configuration: ConfigurationManager(apiClient: apiClient),
-                apiClient: apiClient
+                configurationManager: configurationManager,
+                streaminProviderRepository: StreamingProviderRepository(apiClient: apiClient, configurationManager: configurationManager)
             )
         }
     }
@@ -30,6 +31,7 @@ struct StreamitApp: App {
             case .mock: apiClient = MockApiClient()
             default: apiClient = try ApiClient()
             }
+            configurationManager = ConfigurationManager(apiClient: apiClient)
         } catch {
             logger.critical("APIClient could not created!")
             fatalError("Critical error happened: \(error)")
