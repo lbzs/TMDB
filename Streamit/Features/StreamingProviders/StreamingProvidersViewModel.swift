@@ -37,7 +37,9 @@ final class StreamingProvidersViewModel: ObservableObject {
 
                 self.providers = providers.map { (provider: WatchProvider) in
                     var provider = provider
-                    provider.logoURL = baseURL.appending(path: "w154").appending(path: provider.logoPath.path())
+                    if let logoPath = provider.logoPath {
+                        provider.logoURL = baseURL.appending(path: "w154").appending(path: logoPath.path())
+                    }
                     return provider
                 }
             }

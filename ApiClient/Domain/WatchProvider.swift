@@ -10,10 +10,10 @@ import Foundation
 public struct WatchProvider: Identifiable, Sendable {
     public let id: Int
     public let name: String
-    public let logoPath: URL
+    public let logoPath: URL?
     public var logoURL: URL?
 
-    public init(id: Int, name: String, logoPath: URL) {
+    public init(id: Int, name: String, logoPath: URL?) {
         self.id = id
         self.name = name
         self.logoPath = logoPath
