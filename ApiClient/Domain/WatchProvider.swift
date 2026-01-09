@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WatchProvider: Identifiable {
+public struct WatchProvider: Identifiable, Sendable {
     public let id: Int
     public let name: String
     public let logoPath: URL

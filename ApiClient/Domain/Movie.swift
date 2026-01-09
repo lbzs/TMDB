@@ -7,7 +7,7 @@
 
 import TMDb
 
-public struct Movie: Identifiable, Hashable {
+public struct Movie: Identifiable, Hashable, Sendable {
     public let id: Int
     public let title: String
     public let runtime: Int?

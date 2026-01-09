@@ -8,7 +8,7 @@
 import Foundation
 import TMDb
 
-public protocol ApiClientInterface {
+public protocol ApiClientInterface: Actor {
     func popularMovies() async throws -> [MovieListItem]
     func movieDetails(movieId: Int) async throws -> Movie
     func watchProviders() async throws -> [WatchProvider]
@@ -17,7 +17,7 @@ public protocol ApiClientInterface {
     func downloadImageData(url: URL) async throws -> Data
 }
 
-public struct ApiClient: ApiClientInterface {
+public actor ApiClient: ApiClientInterface {
     private let client: TMDbClient
     
     public init() throws {
@@ -67,7 +67,7 @@ public struct ApiClient: ApiClientInterface {
     }
 }
 
-public struct MockApiClient: ApiClientInterface {
+public actor MockApiClient: ApiClientInterface {
     public init() {}
     public func popularMovies() async throws -> [MovieListItem] {
         try await Task.sleep(nanoseconds: 100)

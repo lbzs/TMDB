@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class ConfigurationManager: ObservableObject {
     enum ConfigurationState {
         case initial
@@ -23,7 +24,6 @@ final class ConfigurationManager: ObservableObject {
         self.apiClient = apiClient
     }
 
-    @MainActor
     func loadConfiguration() async {
         state = .loading
 

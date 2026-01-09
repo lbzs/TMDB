@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Country {
+public struct Country: Sendable {
     public let id: String
     public let countryCode: String
     public let name: String

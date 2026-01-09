@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Configuration {
+public struct Configuration: Sendable {
     public let countries: [Country]
     public let imageConfiguration: ImageConfiguration
 
@@ -18,7 +18,7 @@ public struct Configuration {
     }
 }
 
-public struct ImageConfiguration {
+public struct ImageConfiguration: Sendable {
     public let secureBaseURL: URL
     public let logoSizes: [String]
 

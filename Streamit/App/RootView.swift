@@ -22,7 +22,7 @@ struct RootView: View {
         case .initial:
             Color.green
                 .onAppear {
-                    Task {
+                    Task.detached {
                         await configuration.loadConfiguration()
                     }
                 }
