@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct StreamingProviderCell: View {
-
-    @ObservedObject
-    var viewModel: StreamingProviderCellViewModel
+    var data: Data
 
     var body: some View {
         HStack {
-            AsyncImage(url: viewModel.provider.logoURL!) { (image: Image) in
-                image
-                    .resizable()
-                    .scaledToFit()
-            } placeholder: {
-                ProgressView()
+            Group {
+                if let image = data.image {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    ProgressView()
+                }
             }
             .frame(width: 50, height: 50)
             .aspectRatio(contentMode: .fit)
             .clipShape(.buttonBorder)
 
-            Text(viewModel.provider.name)
+            Text(data.name)
         }
+    }
+}
+
+// MARK: - Data
+extension StreamingProviderCell {
+    struct Data: Identifiable {
+        let id = UUID()
+        let name: String
+        let url: URL?
+        var image: Image?
     }
 }

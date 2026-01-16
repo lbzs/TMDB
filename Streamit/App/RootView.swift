@@ -10,12 +10,12 @@ import SwiftUI
 
 struct RootView: View {
     @ObservedObject private var configurationManager: ConfigurationManager
-    private let streaminProviderRepository: StreamingProviderRepository
+    private let streamingProviderRepository: StreamingProviderRepository
 
     init(configurationManager: ConfigurationManager,
-         streaminProviderRepository: StreamingProviderRepository) {
+         streamingProviderRepository: StreamingProviderRepository) {
         self.configurationManager = configurationManager
-        self.streaminProviderRepository = streaminProviderRepository
+        self.streamingProviderRepository = streamingProviderRepository
     }
 
     var body: some View {
@@ -32,7 +32,7 @@ struct RootView: View {
         case .loaded:
             StreamingProvidersView(
                 viewModel: StreamingProvidersViewModel(
-                    streaminProviderRepository: streaminProviderRepository
+                    streamingProviderRepository: streamingProviderRepository
                 ))
         case .failed:
             Color.red

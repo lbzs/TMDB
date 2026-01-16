@@ -6,12 +6,21 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class StreamingProviderCellViewModel: ObservableObject {
     @Published
-    private(set) var provider: WatchProvider
+    private(set) var providerName: String
+    @Published
+    private(set) var providerImage: Image?
 
-    init(provider: WatchProvider) {
-        self.provider = provider
+    init(providerName: String, providerImageData: Data?) {
+        self.providerName = providerName
+        if let providerImageData,
+           let uiImage = UIImage(data: providerImageData) {
+            self.providerImage = Image(uiImage: uiImage)
+        } else {
+            self.providerImage = nil
+        }
     }
 }

@@ -18,7 +18,7 @@ struct StreamitApp: App {
         WindowGroup {
             RootView(
                 configurationManager: configurationManager,
-                streaminProviderRepository: StreamingProviderRepository(apiClient: apiClient, configurationManager: configurationManager)
+                streamingProviderRepository: StreamingProviderRepository(apiClient: apiClient, configurationManager: configurationManager)
             )
         }
     }

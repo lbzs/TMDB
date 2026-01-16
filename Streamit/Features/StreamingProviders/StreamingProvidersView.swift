@@ -16,10 +16,14 @@ struct StreamingProvidersView: View {
     }
 
     var body: some View {
-        List(viewModel.providers) { (provider: WatchProvider) in
-            StreamingProviderCell(viewModel: StreamingProviderCellViewModel(provider: provider))
+        List(viewModel.listItems) { (provider: StreamingProviderCell.Data) in
+            StreamingProviderCell(data: provider)
+                .onAppear(perform: {
+                    viewModel.handle(action: .downloadImage(url: provider.url))
+                })
         }
         .onAppear(perform: {
+            viewModel.observe()
             viewModel.handle(action: .viewDidAppear)
         })
     }
