@@ -8,24 +8,21 @@
 import Combine
 import SwiftUI
 
-final actor StreamingProvidersViewModel: ObservableObject {
+@MainActor
+final class StreamingProvidersViewModel: ObservableObject {
     enum Action {
         case viewDidAppear
         case downloadImage(url: URL?)
     }
 
     @Published
-    @MainActor
     private(set) var listItems = [StreamingProviderCell.Data]()
 
     private let streamingProviderRepository: StreamingProviderRepository
     private var cancellables = Set<AnyCancellable>()
     
-    @MainActor
     private var fetchTask: Task<(), any Error>?
-    @MainActor
     private var imageDownloadTask: Task<(), any Error>?
-    @MainActor
     private var subscriptionTask: Task<(), any Error>?
 
     init(streamingProviderRepository: StreamingProviderRepository) {
@@ -41,7 +38,6 @@ final actor StreamingProvidersViewModel: ObservableObject {
         subscriptionTask = nil
     }
 
-    @MainActor
     func handle(action: Action) {
         switch action {
         case .viewDidAppear:
@@ -59,8 +55,7 @@ final actor StreamingProvidersViewModel: ObservableObject {
             }
         }
     }
-    
-    @MainActor
+
     func observe() {
         subscriptionTask = Task {
             for await providers in await streamingProviderRepository.providerCache {
