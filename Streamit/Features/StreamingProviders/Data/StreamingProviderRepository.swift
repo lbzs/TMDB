@@ -13,7 +13,6 @@ final actor StreamingProviderRepository {
     private let watchProviderDataSource: WatchProviderDataSource
     
     private var providerCacheSubject: AsyncStream<[WatchProvider]>.Continuation?
-    private var imageCacheSubject = [URL: Data]()
     
     var providerCache: AsyncStream<[WatchProvider]> {
         AsyncStream { continuation in
