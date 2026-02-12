@@ -8,19 +8,24 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 final class StreamingProviderCellViewModel: ObservableObject {
     @Published
-    private(set) var providerName: String
+    private(set) var name: String
     @Published
-    private(set) var providerImage: Image?
+    private(set) var image: Image? = nil
+    
+    private let imageService: ImageService
+    private let url: URL?
 
-    init(providerName: String, providerImageData: Data?) {
-        self.providerName = providerName
-        if let providerImageData,
-           let uiImage = UIImage(data: providerImageData) {
-            self.providerImage = Image(uiImage: uiImage)
-        } else {
-            self.providerImage = nil
-        }
+    init(imageService: ImageService,
+         data: StreamingProviderCell.Data) {
+        self.imageService = imageService
+        self.name = data.name
+        self.url = data.url
+    }
+    
+    func downloadImage() async {
+        image = try? await imageService.downloadImage(from: url)
     }
 }

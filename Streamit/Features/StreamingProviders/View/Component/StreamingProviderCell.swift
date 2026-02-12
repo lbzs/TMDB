@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct StreamingProviderCell: View {
-    var data: Data
+    @ObservedObject
+    private var viewModel: StreamingProviderCellViewModel
+    
+    init(viewModel: StreamingProviderCellViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         HStack {
             Group {
-                if let image = data.image {
+                if let image = viewModel.image {
                     image
                         .resizable()
                         .scaledToFit()
@@ -25,7 +30,10 @@ struct StreamingProviderCell: View {
             .aspectRatio(contentMode: .fit)
             .clipShape(.buttonBorder)
 
-            Text(data.name)
+            Text(viewModel.name)
+        }
+        .task {
+            await viewModel.downloadImage()
         }
     }
 }
@@ -36,6 +44,5 @@ extension StreamingProviderCell {
         let id = UUID()
         let name: String
         let url: URL?
-        var image: Image?
     }
 }

@@ -31,17 +31,4 @@ final actor StreamingProviderRepository {
         providerCacheSubject?.yield(watchProviders)
         return watchProviders
     }
-    
-    func downloadImage(from url: URL?) async throws -> Data? {
-        guard let url else { return nil}
-        
-        // return cached `Data`
-        if let imageData = imageCacheSubject[url] { return imageData }
-        
-        // download if needed
-        let imageData = try await apiClient.downloadImageData(url: url)
-        imageCacheSubject[url] = imageData
-        
-        return imageData
-    }
 }

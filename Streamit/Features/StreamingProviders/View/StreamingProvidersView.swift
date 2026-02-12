@@ -10,21 +10,43 @@ import SwiftUI
 struct StreamingProvidersView: View {
     @ObservedObject
     private var viewModel: StreamingProvidersViewModel
+    private var imageService: ImageService
 
-    init(viewModel: StreamingProvidersViewModel) {
+    init(
+        viewModel: StreamingProvidersViewModel,
+        imageService: ImageService
+    ) {
         self.viewModel = viewModel
+        self.imageService = imageService
     }
 
     var body: some View {
-        List(viewModel.listItems) { (provider: StreamingProviderCell.Data) in
-            StreamingProviderCell(data: provider)
-                .onAppear(perform: {
-                    viewModel.handle(action: .downloadImage(url: provider.url))
-                })
+        content
+            .onAppear(perform: {
+                viewModel.handle(action: .viewDidAppear)
+            })
+    }
+    
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case .initial:
+            Color.green
+            
+        case .loading:
+            ProgressView()
+            
+        case .loaded(let data):
+            List(data) { (provider: StreamingProviderCell.Data) in
+                let cellViewModel = StreamingProviderCellViewModel(
+                    imageService: imageService,
+                    data: provider
+                )
+                return StreamingProviderCell(viewModel: cellViewModel)
+            }
+    
+        case .failed:
+            Color.red
         }
-        .onAppear(perform: {
-            viewModel.observe()
-            viewModel.handle(action: .viewDidAppear)
-        })
     }
 }

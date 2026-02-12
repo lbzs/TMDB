@@ -12,18 +12,24 @@ import SwiftUI
 final class StreamingProvidersViewModel: ObservableObject {
     enum Action {
         case viewDidAppear
-        case downloadImage(url: URL?)
+    }
+    
+    enum State {
+        case initial
+        case loading
+        case loaded([StreamingProviderCell.Data])
+        case failed
     }
 
     @Published
     private(set) var listItems = [StreamingProviderCell.Data]()
+    @Published
+    private(set) var state = State.initial
 
     private let streamingProviderRepository: StreamingProviderRepository
     private var cancellables = Set<AnyCancellable>()
     
     private var fetchTask: Task<(), any Error>?
-    private var imageDownloadTask: Task<(), any Error>?
-    private var subscriptionTask: Task<(), any Error>?
 
     init(streamingProviderRepository: StreamingProviderRepository) {
         self.streamingProviderRepository = streamingProviderRepository
@@ -32,37 +38,33 @@ final class StreamingProvidersViewModel: ObservableObject {
     deinit {
         fetchTask?.cancel()
         fetchTask = nil
-        imageDownloadTask?.cancel()
-        imageDownloadTask = nil
-        subscriptionTask?.cancel()
-        subscriptionTask = nil
     }
 
     func handle(action: Action) {
         switch action {
         case .viewDidAppear:
-            fetchTask = Task {
-                _ = try await streamingProviderRepository.watchProviders()
-            }
-        case .downloadImage(url: let url):
-            imageDownloadTask =  Task {
-                guard let imageData = try await streamingProviderRepository.downloadImage(from: url),
-                      let uiImage = UIImage(data: imageData) else { return }
-
-                if let index = listItems.firstIndex(where: { $0.url == url }) {
-                    listItems[index].image = Image(uiImage: uiImage)
-                }
-            }
+            handleStateUpdate(newState: .loading)
         }
     }
+}
 
-    func observe() {
-        subscriptionTask = Task {
-            for await providers in await streamingProviderRepository.providerCache {
-                listItems = providers.map { (provider: WatchProvider) in
-                    StreamingProviderCell.Data(name: provider.name, url: provider.logoURL)
+private extension StreamingProvidersViewModel {
+    func handleStateUpdate(newState: State) {
+        switch (state, newState) {
+        case (.initial, .loading):
+            state = .loading
+            fetchTask = Task {
+                do {
+                    let providers = try await streamingProviderRepository.watchProviders()
+                    let data = providers.map { (provider: WatchProvider) in
+                        StreamingProviderCell.Data(name: provider.name, url: provider.logoURL)
+                    }
+                    state = .loaded(data)
+                } catch {
+                    state = .failed
                 }
             }
+        default: break
         }
     }
 }
